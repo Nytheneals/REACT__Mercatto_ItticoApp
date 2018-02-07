@@ -1,6 +1,7 @@
 {
-  "name": "cotd",
+  "name": "react__mercatto_itticoapp",
   "version": "0.0.1",
+  "repository": "https://github.com/Nytheneals/REACT__Mercatto_ItticoApp.git",
   "private": true,
   "devDependencies": {
     "autoprefixer-stylus": "0.10.0",
