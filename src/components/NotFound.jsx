@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class NotFound extends Component {
   render() {
-    return <p>Order</p>;
+    return <h1>NotFound!!!!</h1>;
   }
 }
 
