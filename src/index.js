@@ -1,11 +1,11 @@
 // let's go!
-import React, { Component } from "react";
+import React from "react";
 import ReactDom from "react-dom";
 
 //CSS IMPORT
 import "./css/style.css";
 
 //COMPONENT IMPORT
-import StorePicker from "./component/StorePicker";
+import App from "./component/App";
 
-ReactDom.render(<StorePicker />, document.querySelector("#main"));
+ReactDom.render(<App />, document.querySelector("#main"));
