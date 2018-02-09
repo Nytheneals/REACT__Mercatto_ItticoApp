@@ -1,8 +1,22 @@
 import React, { Component } from "react";
 
+// HELPER
+import { formatPrice } from "../helpers";
+// this.prop.details
 class Fish extends Component {
   render() {
-    return <li className="menu-fish">Eyy</li>;
+    const { details } = this.props;
+    return (
+      <li className="menu-fish">
+        <img src={details.image} alt={details.image} />
+        <h3 className="fish-name">
+          {details.name}
+          <span className="price"> {formatPrice(details.price)}</span>
+        </h3>
+        <p> {details.desc}</p>
+        <button>Add to Order</button>
+      </li>
+    );
   }
 }
 
