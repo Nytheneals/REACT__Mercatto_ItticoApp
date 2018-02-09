@@ -4,8 +4,11 @@ import React, { Component } from "react";
 import Order from "./Order";
 import Header from "./Header";
 import Inventory from "./Inventory";
+import Fish from "./Fish";
+import sampleFishes from "../sample-fishes";
 
 class App extends Component {
+  //THIS IS INITIALISED
   constructor() {
     super();
     //OUR INITIAL STATE
@@ -14,27 +17,41 @@ class App extends Component {
       order: {}
     };
     this.addFish = this.addFish.bind(this);
+    this.loadSamples = this.loadSamples.bind(this);
+  }
+  // TO LOAD SAMPLE FISH
+  loadSamples() {
+    this.setState({
+      fishes: sampleFishes
+    });
   }
 
+  // TO ADD FISH
   addFish(fish) {
     //MAKE A COPY OF THE STATE & UPDATE OUR STATE
-    const { fishes } = { ...this.state };
+    const fishes = { ...this.state.fishes };
     //ADD A NEW FISH WITH A UNIQUE TIMESTAMP AS KEY
     const timestamp = Date.now();
     // PASSING IN THE FISH FROM ADDFISH COMPONENT ASSIGNING A UNIQUE KEY TO THE FISH
 
-    fishes[`fish-${timestamp}`] = fish; //THIS WILL BE A PROP ON THE BODY/UNIQUE IDENTIFIER
+    fishes[`fish-${timestamp}`] = fish; //THIS WILL BE A PROP ON THE BODY/UNIQUE IDENTIFIER == fish object
+    // fish-145125227 :{ name: blalha}  at date.now() key in the fishes object
+
     //SET STATE
     this.setState({ fishes: fishes });
+    console.log(this.state.fishes);
   }
   render() {
     return (
       <div className="catch-of-the-day">
         <div className="menu">
           <Header tagline="Fresh Seafood Market" />
+          <ul className="list-of-fishes">
+            <Fish />
+          </ul>
         </div>
         <Order />
-        <Inventory addFish={this.addFish} />
+        <Inventory loadSamples={this.loadSamples} addFish={this.addFish} />
       </div>
     );
   }

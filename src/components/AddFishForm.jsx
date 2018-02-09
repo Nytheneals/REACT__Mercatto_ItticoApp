@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { getFunName } from "../helpers";
 
 class AddFishForm extends Component {
   constructor() {
@@ -16,8 +15,8 @@ class AddFishForm extends Component {
       desc: this.desc.value,
       image: this.image.value
     };
-    this.props.addFish(fish);
-    this.fishForm.reset();
+    this.props.addFish(fish); // STATE CHANGER METHOD FROM APP.jsx
+    this.fishForm.reset(); //Resetting Forms to be empty..
     console.log(fish);
   }
   render() {
