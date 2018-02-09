@@ -17,11 +17,16 @@ class AddFishForm extends Component {
       image: this.image.value
     };
     this.props.addFish(fish);
+    this.fishForm.reset();
     console.log(fish);
   }
   render() {
     return (
-      <form className="fish-edit" onSubmit={e => this.createFish(e)}>
+      <form
+        ref={input => (this.fishForm = input)}
+        className="fish-edit"
+        onSubmit={e => this.createFish(e)}
+      >
         <input
           ref={input => (this.name = input)}
           type="text"
