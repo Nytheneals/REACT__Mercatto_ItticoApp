@@ -16,6 +16,7 @@ class AddFishForm extends Component {
       desc: this.desc.value,
       image: this.image.value
     };
+    this.props.addFish(fish);
     console.log(fish);
   }
   render() {
