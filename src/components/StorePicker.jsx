@@ -9,8 +9,12 @@ class StorePicker extends Component {
   }
   goToStore(e) {
     e.preventDefault();
-    console.log(this.storeInput.value);
     // Grab text from store
+    const storeId = this.storeInput.value;
+    console.log(storeId);
+    // TRANSISTIONING FROM '/' TO '/STORE/:STOREID'
+    // this.context.router.transitionTo(`/store/${storeId}`);
+    this.props.history.push(`store/${this.storeInput.value}`);
   }
   render() {
     return (
@@ -34,4 +38,8 @@ class StorePicker extends Component {
   }
 }
 
+//ACCESSING THE ROUTER IN THIS COMPONENT
+// StorePicker.contextTypes = {
+//   router: React.PropTypes.Object
+// };
 export default StorePicker;

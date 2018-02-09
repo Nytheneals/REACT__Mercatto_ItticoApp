@@ -3,7 +3,7 @@ import React from "react";
 import ReactDom from "react-dom";
 // import { BrowserRouter, Match, Miss } from "react-router";
 // import { Router, Route, Switch } from "react-router";
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"; // eslint-disable-next-line
 
 //CSS IMPORT
 import "./css/style.css";
@@ -21,7 +21,7 @@ const Root = () => {
         <Switch>
           <Route exact path="/" component={StorePicker} />
           <Route path="/store/:storeId" component={App} />
-          <Route component={NotFound} />{" "}
+          <Route component={NotFound} />
         </Switch>
       </div>
     </Router>
