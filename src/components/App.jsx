@@ -18,15 +18,10 @@ class App extends Component {
     };
     this.addFish = this.addFish.bind(this);
     this.loadSamples = this.loadSamples.bind(this);
-  }
-  // TO LOAD SAMPLE FISH
-  loadSamples() {
-    this.setState({
-      fishes: sampleFishes
-    });
+    this.addToOrder = this.addToOrder.bind(this);
   }
 
-  // TO ADD FISH
+  //***********************TO ADD FISH***********************//
   addFish(fish) {
     //MAKE A COPY OF THE STATE & UPDATE OUR STATE
     const fishes = { ...this.state.fishes };
@@ -36,11 +31,30 @@ class App extends Component {
 
     fishes[`fish-${timestamp}`] = fish; //THIS WILL BE A PROP ON THE BODY/UNIQUE IDENTIFIER == fish object
     // fish-145125227 :{ name: blalha}  at date.now() key in the fishes object
+    // OBJECT LITERAL NOTATION.
 
     //SET STATE
     this.setState({ fishes: fishes });
     console.log(this.state.fishes);
   }
+
+  //*******************TO LOAD SAMPLE FISH*******************//
+  loadSamples() {
+    this.setState({
+      fishes: sampleFishes
+    });
+  }
+
+  //**********************ADD TO ORDER**********************//
+  addToOrder(key) {
+    //MAKE A COPY OF THE STATE & UPDATE OUR STATE
+    const order = { ...this.state.order };
+    //  UPDATE OR ADD THE NEW NUMBER OF FISH ORDERED
+    order[key] = order[key] + 1 || 1; //THIS WILL EITHER INCREMENT OR CREATE A NEW FISH WHENEVER WE ADD TO ORDER.
+    this.setState = { order };
+  }
+
+  //********************MAIN COMPONENT********************//
   render() {
     return (
       <div className="catch-of-the-day">
@@ -49,7 +63,12 @@ class App extends Component {
           <ul className="list-of-fishes">
             {/* CHANGING AN OBJECT INTO AN ARRAY AND USING THE KEY AS A UNIQUE KEY, REFER TO SAMPLE DATA FOR FORMAT */}
             {Object.keys(this.state.fishes).map(fish => (
-              <Fish key={fish} details={this.state.fishes[fish]} />
+              <Fish
+                key={fish}
+                index={fish} //AS MY KEY
+                details={this.state.fishes[fish]}
+                addToOrder={this.addToOrder}
+              />
             ))}
           </ul>
         </div>
