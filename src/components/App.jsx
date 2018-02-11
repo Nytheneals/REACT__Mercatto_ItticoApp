@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import base from "../base";
 
 //COMPONENT IMPORT
 import Order from "./Order";
@@ -21,11 +22,24 @@ class App extends Component {
     this.addToOrder = this.addToOrder.bind(this);
   }
 
+  //*****LIFE CVYCLE HOOK*****//
+  // THIS GETS IN BEFORE A COMPONENT IS RENDERED ON PAGE
+  // ALLOWS US TO SYNC OUR DB WITH STATE..
+  componentWillMount() {
+    this.ref = base.syncState(`${this.props.params.storeId}/fishes`, {
+      context: this,
+      state: "fishes"
+    }); // SYNCING WITH PARTICULAR STORE
+  }
+  // componentWillUnmount() {
+  //   base.removeBinding(this.ref);
+  // }
+
   //***********************TO ADD FISH***********************//
   addFish(fish) {
-    //MAKE A COPY OF THE STATE & UPDATE OUR STATE
+    // MAKE A COPY OF THE STATE & UPDATE OUR STATE
     const fishes = { ...this.state.fishes };
-    //ADD A NEW FISH WITH A UNIQUE TIMESTAMP AS KEY
+    // ADD A NEW FISH WITH A UNIQUE TIMESTAMP AS KEY
     const timestamp = Date.now();
     // PASSING IN THE FISH FROM ADDFISH COMPONENT ASSIGNING A UNIQUE KEY TO THE FISH
 

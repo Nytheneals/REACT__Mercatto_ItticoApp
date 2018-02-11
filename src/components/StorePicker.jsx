@@ -13,8 +13,8 @@ class StorePicker extends Component {
     const storeId = this.storeInput.value;
     console.log(storeId);
     // TRANSISTIONING FROM '/' TO '/STORE/:STOREID'
-    // this.context.router.transitionTo(`/store/${storeId}`);
-    this.props.history.push(`store/${this.storeInput.value}`);
+    this.context.router.transitionTo(`/store/${storeId}`);
+    // this.props.history.push(`store/${this.storeInput.value}`);
   }
   render() {
     return (
@@ -37,4 +37,8 @@ class StorePicker extends Component {
     );
   }
 }
+
+StorePicker.contextTypes = {
+  router: React.PropTypes.object
+};
 export default StorePicker;

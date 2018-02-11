@@ -1,10 +1,9 @@
-import { Rebase } from "re-base";
+import Rebase from "re-base";
 
-// CONNECTING TO OUR REALTIME DATABASE (FIRE BASE)
 const base = Rebase.createClass({
-  apiKey: "AIzaSyDeTeRT2TALy_dktDYyWQgl-s_P4Ha3lkE",
-  authDomain: "catch22-9d317.firebaseapp.com",
-  databaseURL: "https://catch22-9d317.firebaseio.com"
+  apiKey: "AIzaSyCdgXxyNqCZEeY36Ss9i4jFMSUh7FdGi6M",
+  authDomain: "catch-of-the-day-wes-bos.firebaseapp.com",
+  databaseURL: "https://catch-of-the-day-wes-bos.firebaseio.com"
 });
 
 export default base;
