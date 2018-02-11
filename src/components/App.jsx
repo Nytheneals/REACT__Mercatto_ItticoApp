@@ -62,11 +62,11 @@ class App extends Component {
           <Header tagline="Fresh Seafood Market" />
           <ul className="list-of-fishes">
             {/* CHANGING AN OBJECT INTO AN ARRAY AND USING THE KEY AS A UNIQUE KEY, REFER TO SAMPLE DATA FOR FORMAT */}
-            {Object.keys(this.state.fishes).map(fish => (
+            {Object.keys(this.state.fishes).map(key => (
               <Fish
-                key={fish}
-                index={fish} //AS MY KEY
-                details={this.state.fishes[fish]}
+                key={key}
+                index={key} //AS MY KEY
+                details={this.state.fishes[key]}
                 addToOrder={this.addToOrder}
               />
             ))}
