@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class Order extends Component {
   render() {
-    return <p>Order</p>;
+    return <p>{this.props.orders}</p>;
   }
 }
 

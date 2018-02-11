@@ -46,12 +46,12 @@ class App extends Component {
   }
 
   //**********************ADD TO ORDER**********************//
-  addToOrder(key) {
+  addToOrder(fish) {
     //MAKE A COPY OF THE STATE & UPDATE OUR STATE
     const order = { ...this.state.order };
     //  UPDATE OR ADD THE NEW NUMBER OF FISH ORDERED
-    order[key] = order[key] + 1 || 1; //THIS WILL EITHER INCREMENT OR CREATE A NEW FISH WHENEVER WE ADD TO ORDER.
-    this.setState = { order };
+    order[fish] = order[fish] + 1 || 1; //THIS WILL EITHER INCREMENT OR CREATE A NEW FISH WHENEVER WE ADD TO ORDER.
+    this.setState({ order });
   }
 
   //********************MAIN COMPONENT********************//
@@ -62,17 +62,17 @@ class App extends Component {
           <Header tagline="Fresh Seafood Market" />
           <ul className="list-of-fishes">
             {/* CHANGING AN OBJECT INTO AN ARRAY AND USING THE KEY AS A UNIQUE KEY, REFER TO SAMPLE DATA FOR FORMAT */}
-            {Object.keys(this.state.fishes).map(key => (
+            {Object.keys(this.state.fishes).map(fish => (
               <Fish
-                key={key}
-                index={key} //AS MY KEY
-                details={this.state.fishes[key]}
+                key={fish}
+                index={fish} //AS MY KEY
+                details={this.state.fishes[fish]}
                 addToOrder={this.addToOrder}
               />
             ))}
           </ul>
         </div>
-        <Order />
+        <Order fishes={this.state.fishes} order={this.state.order} />
         <Inventory loadSamples={this.loadSamples} addFish={this.addFish} />
       </div>
     );
