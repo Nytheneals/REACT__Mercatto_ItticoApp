@@ -21,6 +21,8 @@ class App extends Component {
     this.loadSamples = this.loadSamples.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
     this.updateFish = this.updateFish.bind(this);
+    this.removeFish = this.removeFish.bind(this);
+    this.removeFromOrder = this.removeFromOrder.bind(this);
   }
 
   //*********************LIFE CYCLE HOOKS*********************//
@@ -61,10 +63,6 @@ class App extends Component {
       JSON.stringify(nextState.order) // NEXTSTATE IS THE ORDER SINCE WE CANT STORE AN OBJECT IN localStorage,  WE STRIGNFY IT USING JSON.STRINGFY ITR
     );
   }
-
-  // componentUpdated(){
-
-  // }
 
   //******************END OF LIFE CYCLE HOOKS******************//
 
@@ -109,6 +107,22 @@ class App extends Component {
     this.setState({ fishes });
   }
 
+  //**********************REMOVE FISH**********************//
+  removeFish(key, updatedFish) {
+    // MAKE A COPY OF THE STATE & UPDATE OUR STATE
+    const fishes = { ...this.state.fishes };
+    fishes[key] = null; // EXPLICITLY SET IT TO NULL BECAUSE OF FIREBASE OR ELSE delete fishes[key] would work
+    this.setState({ fishes });
+  }
+
+  //**********************REMOVE FROM ORDER**********************//
+  removeFromOrder(key) {
+    // MAKE A COPY OF THE STATE & UPDATE OUR STATE
+    const order = { ...this.state.order };
+    delete order[key];
+    this.setState({ order });
+  }
+
   //********************MAIN COMPONENT********************//
   render() {
     return (
@@ -131,6 +145,7 @@ class App extends Component {
           fishes={this.state.fishes}
           order={this.state.order}
           params={this.props.params}
+          removeFromOrder={this.removeFromOrder}
         />
         <Inventory
           fishes={this.state.fishes}
@@ -138,6 +153,7 @@ class App extends Component {
           addFish={this.addFish}
           addToOrder={this.addToOrder}
           updateFish={this.updateFish}
+          removeFish={this.removeFish}
         />
       </div>
     );

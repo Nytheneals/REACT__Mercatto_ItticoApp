@@ -11,12 +11,16 @@ class Order extends Component {
   renderOrder(key) {
     const fish = this.props.fishes[key]; //TAKES KEY OF OBJECT
     const count = this.props.order[key]; // CREATES COUNT
+    const removeButton = (
+      <button onClick={() => this.props.removeFromOrder(key)}>&times;</button>
+    );
 
     //IF THERE'S NO FISH OR NO LONGER AVAILABLE
     if (!fish || fish.status === "unavailable") {
       return (
         <li key={key}>
           Sorry, {fish ? fish.name : fish} is no longer available!
+          {removeButton}
         </li>
       );
     }
@@ -25,7 +29,7 @@ class Order extends Component {
     return (
       <li key={key}>
         <span>
-          {count}lbs {fish.name}
+          {count}lbs {fish.name} {removeButton}
         </span>
         <span className="price">{formatPrice(count * fish.price)}</span>
       </li>
