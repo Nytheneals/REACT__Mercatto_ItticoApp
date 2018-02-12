@@ -20,6 +20,7 @@ class App extends Component {
     this.addFish = this.addFish.bind(this);
     this.loadSamples = this.loadSamples.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
+    this.updateFish = this.updateFish.bind(this);
   }
 
   //*********************LIFE CYCLE HOOKS*********************//
@@ -100,6 +101,14 @@ class App extends Component {
     this.setState({ order });
   }
 
+  //**********************UPDATE FISH**********************//
+  updateFish(key, updatedFish) {
+    // MAKE A COPY OF THE STATE & UPDATE OUR STATE
+    const fishes = { ...this.state.fishes };
+    fishes[key] = updatedFish;
+    this.setState({ fishes });
+  }
+
   //********************MAIN COMPONENT********************//
   render() {
     return (
@@ -123,7 +132,13 @@ class App extends Component {
           order={this.state.order}
           params={this.props.params}
         />
-        <Inventory loadSamples={this.loadSamples} addFish={this.addFish} />
+        <Inventory
+          fishes={this.state.fishes}
+          loadSamples={this.loadSamples}
+          addFish={this.addFish}
+          addToOrder={this.addToOrder}
+          updateFish={this.updateFish}
+        />
       </div>
     );
   }
