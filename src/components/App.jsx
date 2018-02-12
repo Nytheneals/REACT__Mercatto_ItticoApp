@@ -22,18 +22,50 @@ class App extends Component {
     this.addToOrder = this.addToOrder.bind(this);
   }
 
-  //*****LIFE CVYCLE HOOK*****//
+  //*********************LIFE CYCLE HOOKS*********************//
+
+  // ****RENDERING THE MAIN STATE(FISHES  STATE) USING FIRE BASE ****//
   // THIS GETS IN BEFORE A COMPONENT IS RENDERED ON PAGE
   // ALLOWS US TO SYNC OUR DB WITH STATE..
   componentWillMount() {
+    // THIS RUNS RIGHT BEFORE THE <APP> IS RENDERED
     this.ref = base.syncState(`${this.props.params.storeId}/fishes`, {
-      context: this,
-      state: "fishes"
+      context: this, // THE COMPONENT REFENRENCE
+      state: "fishes" // THE STATE WE ACTUALLY WANT TO SYNC
     }); // SYNCING WITH PARTICULAR STORE
+
+    //CHECH IF THERES IS ANY ORDER IS LOCALSTORAGE  ORDER
+    const localStorageRef = localStorage.getItem(
+      `order-${this.props.params.storeId}`
+    );
+
+    if (localStorageRef) {
+      // UPDATE OUR APP COMPONENTS ORDER STATE
+      this.setState({
+        order: JSON.parse(localStorageRef) // JSON.parse CHANGES AN STRING TO AN OBJECT
+      });
+    }
   }
-  // componentWillUnmount() {
-  //   base.removeBinding(this.ref);
+
+  // STOP SYNC IF SWITCHING TO ANOTHER STORE
+  componentWillUnmount() {
+    base.removeBinding(this.ref);
+  }
+
+  // ****RENDERING THE ORDER STATE(FISHES  STATE) USING HTML5 LOCAL STORAGE (BROWSER)**** //
+  // LOCAL STORAGE ONLY STORES STRINGS.
+  componentWillUpdate(nextProps, nextState) {
+    localStorage.setItem(
+      `order-${this.props.params.storeId}`, // NAME OF THE STORE
+      JSON.stringify(nextState.order) // NEXTSTATE IS THE ORDER SINCE WE CANT STORE AN OBJECT IN localStorage,  WE STRIGNFY IT USING JSON.STRINGFY ITR
+    );
+  }
+
+  // componentUpdated(){
+
   // }
+
+  //******************END OF LIFE CYCLE HOOKS******************//
 
   //***********************TO ADD FISH***********************//
   addFish(fish) {
@@ -86,7 +118,11 @@ class App extends Component {
             ))}
           </ul>
         </div>
-        <Order fishes={this.state.fishes} order={this.state.order} />
+        <Order
+          fishes={this.state.fishes}
+          order={this.state.order}
+          params={this.props.params}
+        />
         <Inventory loadSamples={this.loadSamples} addFish={this.addFish} />
       </div>
     );
