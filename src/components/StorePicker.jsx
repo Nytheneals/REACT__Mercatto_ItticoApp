@@ -38,6 +38,7 @@ class StorePicker extends Component {
   }
 }
 
+//ACCESSING THE ROUTER/MAKING THE ROUTER AVAILABLE TO THIS COMPONENT
 StorePicker.contextTypes = {
   router: React.PropTypes.object
 };
