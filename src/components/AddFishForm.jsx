@@ -55,4 +55,10 @@ class AddFishForm extends Component {
   }
 }
 
+// PROPTYPE VALIDATIONS
+
+AddFishForm.propTypes = {
+  addFish: React.PropTypes.func.isRequired
+};
+
 export default AddFishForm;
