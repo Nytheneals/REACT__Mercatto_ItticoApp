@@ -37,7 +37,7 @@ class App extends Component {
       state: "fishes" // THE STATE WE ACTUALLY WANT TO SYNC
     }); // SYNCING WITH PARTICULAR STORE
 
-    //CHECH IF THERES IS ANY ORDER IS LOCALSTORAGE  ORDER
+    //CHECK IF THERES IS ANY ORDER IS LOCALSTORAGE  ORDER
     const localStorageRef = localStorage.getItem(
       `order-${this.props.params.storeId}`
     );
@@ -59,7 +59,7 @@ class App extends Component {
   // LOCAL STORAGE ONLY STORES STRINGS.
   componentWillUpdate(nextProps, nextState) {
     localStorage.setItem(
-      `order-${this.props.params.storeId}`, // NAME OF THE STORE
+      `order-${this.props.params.storeId}`, // NAME OF ACTUAL STORE.
       JSON.stringify(nextState.order) // NEXTSTATE IS THE ORDER SINCE WE CANT STORE AN OBJECT IN localStorage,  WE STRIGNFY IT USING JSON.STRINGFY ITR
     );
   }
@@ -108,7 +108,7 @@ class App extends Component {
   }
 
   //**********************REMOVE FISH**********************//
-  removeFish(key, updatedFish) {
+  removeFish(key) {
     // MAKE A COPY OF THE STATE & UPDATE OUR STATE
     const fishes = { ...this.state.fishes };
     fishes[key] = null; // EXPLICITLY SET IT TO NULL BECAUSE OF FIREBASE OR ELSE delete fishes[key] would work
